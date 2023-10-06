@@ -68,8 +68,8 @@ if (TeleMainButton) {
         text: TeleMainButtonStr,
         color: Telegram.WebApp.themeParams.button_color,
         text_color: Telegram.WebApp.button_text_color,
-        is_active: false,
-        is_visible: false,
+        is_active:  !button.disabled,
+        is_visible:  !button.disabled,
     };
     console.log("buttonParams", buttonParams);
     pluginInstance.MainButton.setParams(buttonParams);
