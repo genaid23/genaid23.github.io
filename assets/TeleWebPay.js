@@ -26,7 +26,7 @@ if (TeleMainButton) {
           TeleMainButtonStr = TeleMainButton.title;
     buttonParams = {
         text: TeleMainButtonStr,
-        color: Telegram.WebApp.themeParams.button_color,
+        color: Telegram.WebApp.themeParams.hint_color,
         text_color: Telegram.WebApp.button_text_color,
         is_active: true,
         is_visible: true,
