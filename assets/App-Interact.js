@@ -14,7 +14,7 @@ const AppInteract = {
     {
         console.log("in sendData ",data);
         Telegram.WebApp.sendData(data);
-        // AppInteract.forwardToBot(data);
+        //  AppInteract.forwardToBot(data);
         if(AppInteract.initData && AppInteract.initData !='')
         {
             AppInteract.forwardToBot(data);
@@ -54,7 +54,7 @@ const AppInteract = {
         var foundDelevery = shippingMethods.find(function(m) {
             return m.name === nameToFind;
           });
-        resultString=resultString+'_P'+foundMethod.aprv+'_D'+foundDelevery.aprv+'_en'
+        resultString=resultString+'_P'+foundMethod.aprv+'_D'+foundDelevery.aprv+'_'+jsonObject.curLang;
         console.log('resultString',resultString)  
         // lnk='https://t.me/cacFeedReaderbot?start=py'+resultString
         lnk='https://t.me/Teleshopwebbot?start=py'+resultString
