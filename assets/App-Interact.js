@@ -14,6 +14,54 @@ const AppInteract = {
     {
         console.log("in sendData ",data);
         Telegram.WebApp.sendData(data);
+        // AppInteract.forwardToBot(data);
+        if(AppInteract.initData && AppInteract.initData !='')
+        {
+            AppInteract.forwardToBot(data);
+        }
+    }
+    ,
+    forwardToBot(data)
+    {
+        shippingMethods = [{ "name": 'From Store', "aprv": "str" },
+        { "name": 'Dilivery Service', "aprv": "svs" },
+        ]
+        paymentMethodsList = [{ "name": 'Cash', "aprv": "csh" },
+        { "name": 'Credit Card', "aprv": "cc" },
+
+        { "name": 'Mobile Money', "aprv": "mm" },
+        { "name": 'Wallet C', "aprv": "wc" }
+        ]
+        var jsonObject = JSON.parse(data);
+
+        // Extract id and quantity values and store them in an array
+        var idQuantityArray = jsonObject.cartItems.map(function (item) {
+            return  '_'+item.id+'c'+item.quantity ;
+        });
+
+        // Print the array of id and quantity
+        console.log(idQuantityArray);
+        var resultString = idQuantityArray.join('');
+        console.log(resultString);
+        nameToFind=jsonObject.payemntInfo.selectedPayementMethod;
+        console.log("selectedPaymentMethod,",nameToFind)
+        var foundMethod = paymentMethodsList.find(function(m) {
+            return m.name === nameToFind;
+          });
+          console.log(foundMethod)  
+          nameToFind=jsonObject.payemntInfo.selectedShippingMethod;
+        
+        var foundDelevery = shippingMethods.find(function(m) {
+            return m.name === nameToFind;
+          });
+        resultString=resultString+'_P'+foundMethod.aprv+'_D'+foundDelevery.aprv+'_en'
+        console.log('resultString',resultString)  
+        // lnk='https://t.me/cacFeedReaderbot?start=py'+resultString
+        lnk='https://t.me/Teleshopwebbot?start=py'+resultString
+        console.log('resultString',lnk);
+        Telegram.WebApp.openTelegramLink(lnk);  
+        // selectedShippingMethod
+
     }
     ,
     requestLocation(el) {
